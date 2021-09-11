@@ -47,7 +47,7 @@ int main(int argc, char **argv) {
     if (file_in.is_open())
         for (const auto &elem: vectorized)
             file_out << elem.first << "," << elem.second << ","
-                     << (double) elem.second / counter << "\n";
+                     << (double) elem.second / counter * 100 << "\n";
 
     return 0;
 }
