@@ -10,7 +10,7 @@ int main(int argc, char **argv) {
     if (argc < 2)
         return 1;
 
-    const regex pattern("[a-zA-Z0-9]+");
+    const regex pattern("[[:alnum:]]+");
     const string filename_in = argv[1];
     const string filename_out = argv[2];
 
