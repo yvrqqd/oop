@@ -45,10 +45,12 @@ int main(int argc, char **argv) {
     });
 
     ofstream file_out(filename_out);
-    if (file_in.is_open())
-        for (const auto &elem: vectorized)
-            file_out << elem.first << "," << elem.second << ","
-                     << (double) elem.second / counter * 100 << "\n";
+    if (not file_in.is_open())
+        return 1;
+    
+    for (const auto &elem: vectorized)
+        file_out << elem.first << "," << elem.second << ","
+                 << (double) elem.second / counter * 100 << "\n";
 
     return 0;
 }
