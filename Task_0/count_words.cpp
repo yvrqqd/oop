@@ -17,8 +17,8 @@ int main(int argc, char **argv) {
     int counter = 0;
     string tmp_line;
     unordered_map<string, int> words;
+    
     ifstream file_in(filename_in);
-
     if (not file_in.is_open())
         return 1;
     
