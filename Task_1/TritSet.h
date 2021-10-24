@@ -26,7 +26,7 @@ namespace tritset {
 
         std::size_t capacity();
 
-        srd::size_t cardinality(Trit value);
+        std::size_t cardinality(Trit value);
 
         std::unordered_map<Trit, int, std::hash<int>> cardinality();
 
