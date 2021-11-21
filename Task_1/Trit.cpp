@@ -1,3 +1,5 @@
+#include "Trit.h"
+
 Trit operator&(Trit t1, Trit t2)
 {
     if (t1 == Trit::False || t2 == Trit::False)
