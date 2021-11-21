@@ -34,8 +34,8 @@ Trit operator!(Trit t)
     return Trit::Unknown;
 }
 
-std::ostream& operator<<(std::ostream& os, Trit t) {
-
+std::ostream& operator<<(std::ostream& os, Trit t)
+{
     if (t == Trit::True)
         os << "True";
 
