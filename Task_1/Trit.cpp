@@ -1,14 +1,3 @@
-std::ostream& operator<<(std::ostream& os, Trit a) {
-
-    if (a == Trit::True)
-        os << "True";
-
-    if (a == Trit::False)
-        os << "False";
-
-    return os << "Unknown";
-}
-
 Trit operator&(Trit a, Trit b)
 {
     if (a == Trit::False || b == Trit::False)
@@ -41,4 +30,15 @@ Trit operator!(Trit a)
         return Trit::True;
     
     return Trit::Unknown;
+}
+
+std::ostream& operator<<(std::ostream& os, Trit a) {
+
+    if (a == Trit::True)
+        os << "True";
+
+    if (a == Trit::False)
+        os << "False";
+
+    return os << "Unknown";
 }
