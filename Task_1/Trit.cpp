@@ -1,43 +1,43 @@
-Trit operator&(Trit a, Trit b)
+Trit operator&(Trit t1, Trit t2)
 {
-    if (a == Trit::False || b == Trit::False)
+    if (t1 == Trit::False || t2 == Trit::False)
         return Trit::False;
 
-    if (a == Trit::Unknown || b == Trit::Unknown)
+    if (t1 == Trit::Unknown || t2 == Trit::Unknown)
         return Trit::Unknown;
     
     return Trit::True;
 }
 
-Trit operator|(Trit a, Trit b)
+Trit operator|(Trit t1, Trit t2)
 {
-    if (a == Trit::True || b == Trit::True)
+    if (t1 == Trit::True || t2 == Trit::True)
         return Trit::True;
     
-    if (a == Trit::Unknown || b == Trit::Unknown)
+    if (t1 == Trit::Unknown || t2 == Trit::Unknown)
         return Trit::Unknown;
     
     return Trit::False;
 }
 
 
-Trit operator!(Trit a)
+Trit operator!(Trit t)
 {
-    if(a == Trit::True)
+    if(t == Trit::True)
         return Trit::False;
     
-    if(a == Trit::False)
+    if(t == Trit::False)
         return Trit::True;
     
     return Trit::Unknown;
 }
 
-std::ostream& operator<<(std::ostream& os, Trit a) {
+std::ostream& operator<<(std::ostream& os, Trit t) {
 
-    if (a == Trit::True)
+    if (t == Trit::True)
         os << "True";
 
-    if (a == Trit::False)
+    if (t == Trit::False)
         os << "False";
 
     return os << "Unknown";
