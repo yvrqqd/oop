@@ -1,53 +1,26 @@
-#include <fstream>
 #include "TritSet.h"
 
-
-using namespace std;
-using namespace tritset;
-
-TritSet::Tritset(size_t numOfTrits) {
-    this->length = (numOfTrits / 4) / sizeof(size_t) + 1;
-    this->data;
+TritSet::TritSet(size_t numOfTrits) {
+    this->capacity = (numOfTrits / 4) / sizeof(size_t) + 1;
+    this->data = <uint*>malloc(ceil( 2*this->length / (8*sizeof(uint))));
 }
-TrisSet::vector<unsigned int> arr;
 
 void TritSet::capacity() {
-
+     return this->capacity;
 }
 
 void TritSet::shrink() {
-
 }
 
 void TritSet::cardinality(Trit value) {
-    //std::unordered_map<Trit, int, std::hash<int> > cardinality();
 }
 
-size_t TritSet::trim(size_t lastIndex) {
-
+std::size_t TritSet::trim(std::size_t lastIndex) {
 }
 
-size_t TrisSet::length();
+std::size_t TrisSet::length();
+}
 
-}
-TritProxy TritSet::operator[](size_t idx) {
-    return false;
-}
-TritProxy::TritProxy(Trit trit) {
-//todo
-}
-bool TritProxy::operator==(Trit trit) const{
-    return false;
-}
-bool TritProxy::operator()(Trit trit) const{
-    return false;
-}
-bool TritProxy::operator!(Trit trit) const{
-    return false;
-}
-bool TritProxy::operator&(Trit trit) const{
-    return false;
-}
-bool TritProxy::operator|(Trit trit) const{
-    return false;
+TritSet::~TritSet() {
+    free(this->data);
 }
