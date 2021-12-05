@@ -48,3 +48,23 @@ std::size_t TritSet::trim(size_t lastIndex) {
     this->lastSetted = lastIndex;
     this->shrink();
 }
+
+std::size_t cardinality(Trit value) const {
+    std::size_t count;
+    for (auto i: this->length-1)
+        if (this->operator[](i) == value)
+            count++;
+    return count;
+}
+
+std::unordered_map<Trit, int, std::hash<int> > TritSet::cardinality() const {
+    std::unordered_map<Trit::trit, int, std::hash<int> > tritMap = {
+            {"True",    0},
+            {"False",   0},
+            {"Unknown", 0}
+    };
+    tritMap["True"] = this->cardinality(True);
+    tritMap["False"] = this->cardinality(False);
+    tritMap["Unknown"] = this->cardinality(Unknown);
+    return tritMap;
+}
