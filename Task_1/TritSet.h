@@ -15,7 +15,7 @@ private:
         TritSet& tritset;
         std::size_t pos;
     public:
-        TritProxy(TritSet&, uint&, std::size_t)
+        TritProxy(TritSet&, std::size_t)
         TritProxy& operator= (Trit);
         bool operator==(Trit) const;
     };
@@ -34,7 +34,7 @@ public:
 
     void set(std::size_t, Trit);
     Trit get(std::size_t);
-    
+
     TritSet operator&(const TritSet&) const;
     TritSet operator|(const TritSet&) const;
     TritSet operator!(const TritSet&) const;
@@ -42,4 +42,3 @@ public:
     const Trit operator[](std::size_t) const;
     TritProxy operator[](std::size_t);
 };
-
