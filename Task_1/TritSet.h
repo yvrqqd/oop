@@ -1,5 +1,7 @@
 #pragma once
+
 #include "Trit.h"
+
 typedef unsigned int uint;
 
 class TritSet {
