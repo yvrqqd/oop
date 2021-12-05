@@ -54,7 +54,7 @@ std::size_t TritSet::cardinality(Trit value) const {
 }
 
 std::unordered_map<Trit::Trit, uint, std::hash<uint> > TritSet::cardinality() const {
-    std::unordered_map<Trit::trit, int, std::hash<int> > tritMap = {
+    std::unordered_map<Trit, int, std::hash<int> > tritMap = {
             {"True",    0},
             {"False",   0},
             {"Unknown", 0}
@@ -64,3 +64,17 @@ std::unordered_map<Trit::Trit, uint, std::hash<uint> > TritSet::cardinality() co
     tritMap["Unknown"] = this->cardinality(Unknown);
     return tritMap;
 }
+
+
+void TritSet::set(std::size_t index, Trit value);
+Trit TritSet::get(std::size_t index);
+TritSet operator&(const TritSet&) const;
+TritSet operator|(const TritSet&) const;
+TritSet operator!(const TritSet&) const;
+TritSet TritSet::operator!(const TritSet&) const;
+const Trit TritSet::operator[](std::size_t) const;
+const Trit TritSet::operator[](std::size_t idx) const;
+TritSet::TritProxy TritSet::operator[](std::size_t pos);
+TritSet::TritProxy& TritSet::TritProxy::operator=(Trit trit);
+TritSet::TritProxy::TritProxy(TritSet& tritset, std::size_t index);
+
