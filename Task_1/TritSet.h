@@ -17,12 +17,12 @@ private:
     public:
         TritProxy(TritSet&, uint&, std::size_t)
         TritProxy& operator= (Trit);
-        operator Trit();
+        bool operator==(Trit) const;
     };
 
 public:
     TritSet(std::size_t);
-    TritSet(const TritSet&&);
+    TritSet(const TritSet&);
     ~TritSet();
 
     void shrink();
@@ -30,12 +30,16 @@ public:
     std::size_t length() const;
     std::size_t capacity() const;
     std::size_t cardinality(Trit) const;
-    std::unordered_map<Trit, uint, std::hash<uint>> cardinality();
+    std::unordered_map<Trit, uint, std::hash<uint>> cardinality() const;
 
+    void set(std::size_t, Trit);
+    Trit get(std::size_t);
+    
     TritSet operator&(const TritSet&) const;
     TritSet operator|(const TritSet&) const;
     TritSet operator!(const TritSet&) const;
 
-    Trit operator[](std::size_t) const;
+    const Trit operator[](std::size_t) const;
     TritProxy operator[](std::size_t);
 };
+
