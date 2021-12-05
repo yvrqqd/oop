@@ -30,7 +30,6 @@ public:
     std::size_t cardinality(Trit) const;
     std::unordered_map<Trit, uint, std::hash<uint>> cardinality();
 
-    void operator=(const TritSet&);
     TritSet operator&(const TritSet&) const;
     TritSet operator|(const TritSet&) const;
     TritSet operator!(const TritSet&) const;
