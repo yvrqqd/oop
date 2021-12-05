@@ -28,3 +28,23 @@ std::size_t TritSet::capacity() const {
 std::size_t TrisSet::length() const {
     return this->length;
 }
+
+std::size_t TritSet::trim(size_t lastIndex) {
+    this->lastSetted = lastIndex;
+    this->shrink();
+}
+
+void TritSet::shrink() {
+    if (this->length == 0)
+        return;
+    uint* newArr = new uint[ceil(2 * this->capacity / (8 * sizeof(uint)))];
+    std::memcpy(newArr, this->arr, ceil(2 * this->capacity / (8 * sizeof(uint))));
+    delete[] this->arr;
+    this->capacity = this->length;
+    this->arr=newArr;
+}
+
+std::size_t TritSet::trim(size_t lastIndex) {
+    this->lastSetted = lastIndex;
+    this->shrink();
+}
