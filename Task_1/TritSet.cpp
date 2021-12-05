@@ -1,4 +1,5 @@
 #include "TritSet.h"
+#include "Trit.h"
 
 typedef unsigned int uint;
 
@@ -8,7 +9,7 @@ TritSet::TritSet(const std::size_t numOfTrits) {
     this->arr = new uint[ceil(2 * numOfTrits / (8 * sizeof(uint)))];
 }
 
-TritSet::TritSet(const TritSet &ts) {
+TritSet::TritSet(const TritSet &&ts) {
     this->length = ts.length;
     this->capacity = ts.capacity;
     this->lastSetted = ts.lastSetted;
@@ -25,13 +26,8 @@ std::size_t TritSet::capacity() const {
     return this->capacity;
 }
 
-std::size_t TrisSet::length() const {
+std::size_t TritSet::length() const {
     return this->length;
-}
-
-std::size_t TritSet::trim(size_t lastIndex) {
-    this->lastSetted = lastIndex;
-    this->shrink();
 }
 
 void TritSet::shrink() {
@@ -49,7 +45,7 @@ std::size_t TritSet::trim(size_t lastIndex) {
     this->shrink();
 }
 
-std::size_t cardinality(Trit value) const {
+std::size_t TritSet::cardinality(Trit value) const {
     std::size_t count;
     for (auto i: this->length-1)
         if (this->operator[](i) == value)
@@ -57,7 +53,7 @@ std::size_t cardinality(Trit value) const {
     return count;
 }
 
-std::unordered_map<Trit, int, std::hash<int> > TritSet::cardinality() const {
+std::unordered_map<Trit::Trit, uint, std::hash<uint> > TritSet::cardinality() const {
     std::unordered_map<Trit::trit, int, std::hash<int> > tritMap = {
             {"True",    0},
             {"False",   0},
