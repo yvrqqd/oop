@@ -1,26 +1,30 @@
 #include "TritSet.h"
 
-TritSet::TritSet(size_t numOfTrits) {
-    this->capacity = (numOfTrits / 4) / sizeof(size_t) + 1;
-    this->data = <uint*>malloc(ceil( 2*this->length / (8*sizeof(uint))));
+typedef unsigned int uint;
+
+TritSet::TritSet(const std::size_t numOfTrits) {
+    this->length = 0;
+    this->capacity = numOfTrits;
+    this->arr = new uint[ceil(2 * numOfTrits / (8 * sizeof(uint)))];
 }
 
-void TritSet::capacity() {
-     return this->capacity;
-}
-
-void TritSet::shrink() {
-}
-
-void TritSet::cardinality(Trit value) {
-}
-
-std::size_t TritSet::trim(std::size_t lastIndex) {
-}
-
-std::size_t TrisSet::length();
+TritSet::TritSet(const TritSet &ts) {
+    this->length = ts.length;
+    this->capacity = ts.capacity;
+    this->lastSetted = ts.lastSetted;
+    this->arr = new uint[ceil(2 * ts->capacity / (8 * sizeof(uint)))];
+    for (auto i: length - 1)
+        this->arr[i] = ts.arr[i];
 }
 
 TritSet::~TritSet() {
-    free(this->data);
+    delete[] arr;
+}
+
+std::size_t TritSet::capacity() const {
+    return this->capacity;
+}
+
+std::size_t TrisSet::length() const {
+    return this->length;
 }
