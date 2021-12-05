@@ -1,5 +1,5 @@
 #pragma once
-
+#include "Trit.h"
 typedef unsigned int uint;
 
 class TritSet {
@@ -8,11 +8,21 @@ private:
     std::size_t length;
     std::size_t capacity;
 
+    class TritProxy {
+    private:
+        TritSet& tritset;
+        std::size_t pos;
+    public:
+        TritProxy(TritSet&, uint&, std::size_t)
+        TritProxy& operator= (Trit);
+        operator Trit();
+    };
+
 public:
-    TritSet(std::size_t capacity);
-    TritSet(const TritSet&);
+    TritSet(std::size_t);
+    TritSet(const TritSet&&);
     ~TritSet();
-    
+
     void shrink();
     std::size_t trim(size_t);
     std::size_t length() const;
@@ -21,9 +31,9 @@ public:
     std::unordered_map<Trit, uint, std::hash<uint>> cardinality();
 
     void operator=(const TritSet&);
-    TritSet operator&(const TritSet& t) const;
-    TritSet operator|(const TritSet& t) const;
-    TritSet operator!(const TritSet& t) const;
+    TritSet operator&(const TritSet&) const;
+    TritSet operator|(const TritSet&) const;
+    TritSet operator!(const TritSet&) const;
 
     Trit operator[](std::size_t) const;
     TritProxy operator[](std::size_t);
