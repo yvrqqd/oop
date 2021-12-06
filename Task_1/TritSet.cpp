@@ -9,7 +9,7 @@ TritSet::TritSet(const std::size_t numOfTrits) {
     this->arr = new uint[ceil(2 * numOfTrits / (8 * sizeof(uint)))];
 }
 
-TritSet::TritSet(const TritSet &&ts) {
+TritSet::TritSet(const TritSet &ts) {
     this->length = ts.length;
     this->capacity = ts.capacity;
     this->lastSetted = ts.lastSetted;
@@ -40,12 +40,12 @@ void TritSet::shrink() {
     this->arr=newArr;
 }
 
-std::size_t TritSet::trim(size_t lastIndex) {
+std::size_t TritSet::trim(const size_t lastIndex) {
     this->lastSetted = lastIndex;
     this->shrink();
 }
 
-std::size_t TritSet::cardinality(Trit value) const {
+std::size_t TritSet::cardinality(const Trit value) const {
     std::size_t count;
     for (auto i: this->length-1)
         if (this->operator[](i) == value)
@@ -53,7 +53,7 @@ std::size_t TritSet::cardinality(Trit value) const {
     return count;
 }
 
-std::unordered_map<Trit::Trit, uint, std::hash<uint> > TritSet::cardinality() const {
+std::unordered_map<const Trit, const std::size_t, std::hash<std::size_t> > TritSet::cardinality() const {
     std::unordered_map<Trit, int, std::hash<int> > tritMap = {
             {"True",    0},
             {"False",   0},
@@ -66,11 +66,14 @@ std::unordered_map<Trit::Trit, uint, std::hash<uint> > TritSet::cardinality() co
 }
 
 
-void TritSet::set(std::size_t index, Trit value);
-Trit TritSet::get(std::size_t index);
-TritSet operator&(const TritSet&) const;
-TritSet operator|(const TritSet&) const;
-TritSet operator!(const TritSet&) const;
+void TritSet::set(const std::size_t index, const Trit value);
+Trit TritSet::get(const std::size_t index);
+TritSet operator&=(const TritSet&) const;
+TritSet operator|=(const TritSet&) const;
+TritSet operator!=(const TritSet&) const;
+TritSet operator&(const TritSet&, const TritSet&) const;
+TritSet operator|(const TritSet&, const TritSet&) const;
+TritSet operator!(const TritSet&, const TritSet&) const;
 TritSet TritSet::operator!(const TritSet&) const;
 const Trit TritSet::operator[](std::size_t) const;
 const Trit TritSet::operator[](std::size_t idx) const;
