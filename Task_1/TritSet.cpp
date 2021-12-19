@@ -65,19 +65,99 @@ std::unordered_map<const Trit, const std::size_t, std::hash<std::size_t> > TritS
     return tritMap;
 }
 
+void TritSet::set(const std::size_t index, const Trit value) {
+    if (index >= this->length && value == Trit::Unknown)
+        return;
 
-void TritSet::set(const std::size_t index, const Trit value);
-Trit TritSet::get(const std::size_t index);
-TritSet operator&=(const TritSet&) const;
-TritSet operator|=(const TritSet&) const;
-TritSet operator!=(const TritSet&) const;
-TritSet operator&(const TritSet&, const TritSet&) const;
-TritSet operator|(const TritSet&, const TritSet&) const;
-TritSet operator!(const TritSet&, const TritSet&) const;
-TritSet TritSet::operator!(const TritSet&) const;
-const Trit TritSet::operator[](std::size_t) const;
-const Trit TritSet::operator[](std::size_t idx) const;
-TritSet::TritProxy TritSet::operator[](std::size_t pos);
-TritSet::TritProxy& TritSet::TritProxy::operator=(Trit trit);
-TritSet::TritProxy::TritProxy(TritSet& tritset, std::size_t index);
+    std::size_t group_index = 2 * index / (8 * sizeof(uint));
+    if (group_index >= this->capacity)
+        return;
 
+    if (index + 1 > this->length)
+        this->length = index + 1;
+
+    uint bit_value;
+    switch (value) {
+        case Trit::True:
+            bit_value = 0b01u;
+            break;
+        case Trit::False:
+            bit_value = 0b10u;
+            break;
+        default:
+            bit_value = 0b00u;
+    }
+
+    uint pos_in_group = (2 * index) % (8 * sizeof(uint));
+    arr[group_index] = TritSet::set(this->arr[group_index], pos_in_group, bit_value & 0b1u);
+    arr[group_index] = TritSet::set(this->arr[group_index], pos_in_group + 1, bit_value >> 1u);
+}
+
+Trit TritSet::get(const std::size_t index) {
+    if (index >= this->length)
+        return Trit::Unknown;
+    
+    size_t group_index = (2 * index) / (8 * sizeof(uint));
+    uint pos_in_group = (2 * index) % (8 * sizeof(uint));
+    uint bit_value = (this->arr[group_index] >> pos_in_group) & 0b11u;
+    switch (bit_value) {
+        case 0b01:
+            return Trit::True;
+        case 0b10:
+            return Trit::False;
+        default:
+            return Trit::Unknown;
+    }
+}
+
+TritSet operator&=(const TritSet& ts) const {
+    *this = *this & ts;
+}
+
+TritSet operator|=(const TritSet& ts) const {
+    *this = *this | ts;
+}
+
+
+TritSet operator&(const TritSet& ts) const {
+    std::size_t length = td::max(this->length, ts.length);
+    std::size_t capacity = std::max(this->capacity, ts.capacity);
+    TritSet tmp(capacity);
+    for (std::size_t i = 0; i < length; i++)
+        tmp.set(i, this->get(i) | ts2.get(i));
+    return tmp;
+}
+
+TritSet operator|(const TritSet& ts) const {
+    std::size_t length = td::max(this->length, ts.length);
+    std::size_t capacity = std::max(this->capacity, ts.capacity);
+    TritSet tmp(capacity);
+    for (std::size_t i = 0; i < length; i++)
+        tmp.set(i, this->get(i) | ts.get(i));
+    return tmp;
+}
+
+TritSet TritSet::operator!(const TritSet& ts) const {
+    TritSet tmp = TritSet(ts.capacity);
+    for (std::size_t i = 0; i < ts.length; i++)
+        tmp.set(i, !ts.get(i));
+    return tmp;
+}
+
+const Trit TritSet::operator[](std::size_t index) const {
+    return this->get(index);
+}
+
+
+TritSet::TritProxy TritSet::operator[](std::size_t index) {
+    return TritProxy{*this, index};
+}
+
+TritSet::TritProxy& TritSet::TritProxy::operator=(Trit trit) {
+    ts.set(idx, trit);
+    return *this;
+}
+
+TritSet::TritProxy::TritProxy(TritSet& tritset, std::size_t index){
+    return;
+}
