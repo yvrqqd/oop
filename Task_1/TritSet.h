@@ -39,9 +39,8 @@ public:
     TritProxy operator[](const std::size_t);
 };
 
-TritSet operator&=(const TritSet&) const;
-TritSet operator|=(const TritSet&) const;
-TritSet operator!=(const TritSet&) const;
-TritSet operator&(const TritSet&, const TritSet&);
-TritSet operator|(const TritSet&, const TritSet&);
-TritSet operator!(const TritSet&, const TritSet&);
+TritSet operator&=(const TritSet&);
+TritSet operator|=(const TritSet&);
+TritSet operator&(const TritSet&);
+TritSet operator|(const TritSet&);
+TritSet operator!();
