@@ -3,8 +3,8 @@
 
 class Writer: public Worker{
 private:
-    vector <string> args;
+    std::vector <std::string> args;
 public:
-    WriteFile(string out);
-    bool exec(vector<string> *input, vector<string> *output) override;
+    WriteFile(std::string out);
+    bool exec(std::vector<std::string> *input, std::vector<std::string> *output) override;
 };
