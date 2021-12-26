@@ -1,5 +1,6 @@
 #pragma once
-
+#include<iostream>
+#include<unordered_map>
 #include "Trit.h"
 
 typedef unsigned int uint;
@@ -8,7 +9,6 @@ class TritSet {
 private:
     uint *arr;
     std::size_t length;
-    std::size_t capacity;
 public:
     class TritProxy{
         friend class TritSet;
@@ -18,28 +18,28 @@ public:
     public:
         TritProxy();
         TritProxy& operator=(Trit value);
-        bool operator==(Trit A);
     };
-    
+
     TritSet(const std::size_t);
     TritSet(const TritSet&);
     ~TritSet();
 
     void shrink();
     std::size_t trim(const std::size_t);
-    std::size_t length() const;
+    std::size_t len() const;
     std::size_t capacity() const;
     std::size_t cardinality(Trit) const;
-    std::unordered_map<const Trit, const std::size_t, std::hash<std::size_t>> cardinality() const;
+    std::unordered_map<Trit, std::size_t, std::hash<std::size_t>> cardinality() const;
 
-    void set(const std::size_t, Trit);
+    void set(const std::size_t, const Trit);
     Trit get(const std::size_t) const;
-    
+
+    TritSet& operator=(const TritSet&);
+    void operator&=(const TritSet&);
+    void operator|=(const TritSet&);
+    void operator!=(const TritSet&);
     const Trit operator[](const std::size_t) const;
     TritProxy &operator[](const std::size_t);
 };
-TritSet operator&=(const TritSet&);
-TritSet operator|=(const TritSet&);
 TritSet operator&(const TritSet&, const TritSet&);
 TritSet operator|(const TritSet&, const TritSet&);
-TritSet operator!();
