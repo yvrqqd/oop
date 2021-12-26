@@ -9,18 +9,18 @@ private:
     uint *arr;
     std::size_t length;
     std::size_t capacity;
-
-    class TritProxy {
-    private:
-        TritSet& tritset;
-        std::size_t pos;
-    public:
-        TritProxy(TritSet&, const std::size_t);
-        TritProxy& operator= (const Trit);
-        bool operator==(const Trit) const;
-    };
-
 public:
+    class TritProxy{
+        friend class TritSet;
+    private:
+        uint index;
+        TritSet *last;
+    public:
+        TritProxy();
+        TritProxy& operator=(Trit value);
+        bool operator==(Trit A);
+    };
+    
     TritSet(const std::size_t);
     TritSet(const TritSet&);
     ~TritSet();
@@ -36,11 +36,10 @@ public:
     Trit get(const std::size_t) const;
     
     const Trit operator[](const std::size_t) const;
-    TritProxy operator[](const std::size_t);
+    TritProxy &operator[](const std::size_t);
 };
-
 TritSet operator&=(const TritSet&);
 TritSet operator|=(const TritSet&);
-TritSet operator&(const TritSet&);
-TritSet operator|(const TritSet&);
+TritSet operator&(const TritSet&, const TritSet&);
+TritSet operator|(const TritSet&, const TritSet&);
 TritSet operator!();
