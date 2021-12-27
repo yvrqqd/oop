@@ -3,7 +3,7 @@
 #include "Reader.h"
 #include "GrepBlock.h"
 #include "Replace.h"
-#include "Dump.h"
+#include "DumpBlock.h"
 #include "Writer.h"
 #include "Sort.h"
 #include "unordered_map"
