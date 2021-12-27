@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Replace.h"
+#include "ReplaceBlock.h"
 
 ReplaceBlock::Replace(const string& word1, const string& word2) {
     args.push_back(word1);
