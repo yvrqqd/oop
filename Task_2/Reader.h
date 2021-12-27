@@ -8,5 +8,5 @@ private:
     std::vector <std::string> args;
 public:
     ReadFile(std::string);
-    bool exec(std::vector<std::string> *input, std::vector<std::string> *output) override;
+    bool exec(std::vector<std::string>*, std::vector<std::string>*) override;
 };
