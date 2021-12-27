@@ -8,6 +8,6 @@ private:
 public:
     GrepBlock(std::string);
     GrepBlock(std::string &&);
-    bool exec(std::vector<std::string> *input, std::vector<std::string>* output,
-              bool &contain_input, bool &contain_output, unsigned int index) override;
+    bool exec(std::vector<std::string>*, std::vector<std::string>* ,
+              bool&, bool&, unsigned int) override;
 };
