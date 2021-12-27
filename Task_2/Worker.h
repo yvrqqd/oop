@@ -7,5 +7,5 @@
 class Worker {
 public:
     virtual ~Worker() = default;
-    virtual bool exec(std::vector <std::string> *input, std::vector <std::string> * output) = 0;
+    virtual bool exec(std::vector <std::string>*, std::vector <std::string>*) = 0;
 };
