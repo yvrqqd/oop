@@ -5,6 +5,6 @@ class Writer: public Worker{
 private:
     std::vector <std::string> args;
 public:
-    WriteFile(std::string);
-    bool exec(std::vector<std::string>*, std::vector<std::string>*) override;
+    explicit Writer(const std::string&);
+    bool exec(std::vector<std::string> *, std::vector<std::string> *) override;
 };
