@@ -1,18 +1,16 @@
-#include "Grep.h"
+#include "GrepBlock.h"
+
 
 GrepBlock::GrepBlock(std::string && word) {
     args.push_back(word);
     word = nullptr;
 }
 
-GrepBlock::GrepBlock(std::string word) {
+GrepBlock::GrepBlock(const std::string& word) {
     args.push_back(word);
 }
 
-bool GrepBlock::exec(std::vector<std::string> *input, std::vector<std::string> *output,
-                     bool &contain_input, bool &contain_output, unsigned int index) {
-    if(!contain_input)
-        throw logic_error("No input on grep, block index: " + to_string(index));
+bool GrepBlock::exec(std::vector<std::string> *input, std::vector<std::string> *output) {
     if(input->empty())
     {
         (*output) = (*input);
@@ -24,6 +22,5 @@ bool GrepBlock::exec(std::vector<std::string> *input, std::vector<std::string> *
         if(i.find(args[0]) != std::string::npos)
             output->push_back(i);
 
-    contain_output = true;
     return true;
 }
