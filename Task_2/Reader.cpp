@@ -1,8 +1,8 @@
 #include "Reader.h"
 
 bool Reader::exec(std::vector<std::string> *input, std::vector<std::string> *output) {
-    string line;
-    ifstream stream(args[0]);
+    std::string line;
+    std::ifstream stream(args[0]);
     while (getline(stream,line)){
         output->push_back(line);
     }
@@ -10,6 +10,6 @@ bool Reader::exec(std::vector<std::string> *input, std::vector<std::string> *out
     return true;
 }
 
-Reader::ReadFile(std::string input) {
+Reader::Reader(const std::string& input) {
     args.push_back(input);
 }
